@@ -1,72 +1,352 @@
-# 🚀 CodeHub v2.0 - CodeChef to GitHub Auto-Syncer
+# 🚀 CodeHub - Automated CodeChef to GitHub Sync
 
-CodeHub is a modern, lightweight, and blazing-fast Manifest V3 Chrome/Brave extension that automatically syncs your accepted CodeChef submissions to GitHub. It automates your competitive programming documentation workflow by creating structured daily logs and detailed summary tables completely hands-free!
+<div align="center">
+
+![Version](https://img.shields.io/badge/version-2.0.0-emerald)
+![Manifest](https://img.shields.io/badge/manifest-v3-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+
+*Automatically sync your accepted CodeChef solutions to GitHub with beautiful date-wise organization*
+
+</div>
 
 ---
 
 ## ✨ Features
 
-* **Sleek Dev-Centric UI:** Modern dark mode interface with deep space grays, vivid emerald accents for success states, and smooth CSS transitions.
-* **Robust Capture-on-Submit Strategy:** Intercepts the "Submit" click to instantly cache your code from the Monaco Editor in local storage, preventing dynamic SPA/React unmounting issues.
-* **Chronological Date-Wise Organization:** Automatically groups your code inside folder structures formatted as `DD-MM-YY/` (e.g., `29-06-26/`).
-* **Dynamic README.md Generator:** Automatically maintains an elegant daily markdown log table of all problems solved on that specific date (appends rows dynamically without wiping history!).
-* **Beautiful Code Headers:** Every pushed file gets an auto-generated ASCII comment box containing the problem code, platform, status, date, and problem URL.
-* **Security & Quality of Life:** Password visibility toggle for your Personal Access Token, credentials status indicator, and local submission history panel.
+### 🎯 Core Functionality
+- **Automatic Sync**: Instantly pushes your accepted CodeChef solutions to GitHub
+- **Capture-on-Submit Strategy**: Captures code at the moment you click submit - no more race conditions!
+- **Monaco Editor Support**: Properly extracts code from CodeChef's React-based Monaco editor
+- **Verdict Detection**: Watches for "Correct Answer" verdict and triggers push automatically
+
+### 📁 Smart Organization
+- **Date-Wise Folders**: Solutions organized by date in `DD-MM-YY` format (e.g., `29-06-26/`)
+- **Dynamic README Generation**: Each date folder gets its own `README.md` tracking all problems solved that day
+- **README Updates**: Automatically appends new solutions to existing date READMEs - never overwrites!
+- **Clean File Naming**: Solutions saved as `PROBLEMCODE.ext` (e.g., `TOTR.cpp`)
+
+### 💎 Beautiful UI
+- **Modern Dark Theme**: Sleek, developer-centric design with deep space grays
+- **Emerald & Blue Accents**: High-contrast color scheme for excellent readability
+- **Smooth Animations**: Polished transitions and micro-interactions
+- **Live Status Indicator**: Visual connection status with your GitHub repository
+- **Password Toggle**: Show/hide your Personal Access Token
+- **History Tracking**: View all your successful pushes with commit links
+
+### 🛡️ Robust Architecture
+- **MutationObserver Fix**: Observes `document.body` to prevent crashes
+- **No Race Conditions**: Code captured before React re-renders the page
+- **Multi-Language Support**: C++, Python, Java, JavaScript, C#, Go, Rust, and more
+- **Error Handling**: Comprehensive error messages and validation
+- **Manifest V3**: Built with the latest Chrome extension standards
 
 ---
 
-## ⚙️ How to Install (For Users / Friends)
+## 📦 Installation
 
-Since CodeHub is an open-source tool, you don't need to install it from the Chrome Web Store. Follow these simple steps to load it locally:
+### Prerequisites
+1. A GitHub account
+2. A GitHub repository where you want to store solutions
+3. A GitHub Personal Access Token with `repo` scope
 
-1. **Download the Extension:** Go to the **Releases** section on the right side of this GitHub repository and download the `CodeHub-v2.0.zip` file.
-2. **Extract the ZIP:** Extract the downloaded file into a dedicated folder on your computer.
-3. **Open Extensions Page:** Open your Chromium-based browser (Chrome, Brave, Edge) and navigate to:
-   * Chrome: `chrome://extensions/`
-   * Brave: `brave://extensions/`
-4. **Enable Developer Mode:** Turn ON the **Developer mode** toggle switch in the top-right corner.
-5. **Load the Extension:** Click the **Load unpacked** button in the top-left corner, select the extracted folder, and boom—CodeHub is active!
+### Setup Steps
 
----
+1. **Generate GitHub Token**
+   - Visit [GitHub Token Settings](https://github.com/settings/tokens/new?scopes=repo&description=CodeHub+Extension)
+   - Select the `repo` scope
+   - Generate and copy your token (starts with `ghp_` or `github_pat_`)
 
-## 🔑 Configuration & GitHub PAT Setup Guide
+2. **Create Repository**
+   - Create a new repository on GitHub (e.g., `CodeChef-Solutions`)
+   - Can be public or private
 
-To securely push code directly from your browser to your repository, CodeHub requires a GitHub Personal Access Token (PAT). Here is how to set it up:
+3. **Install Extension**
+   - Clone this repository or download as ZIP
+   - Open Chrome and go to `chrome://extensions/`
+   - Enable "Developer mode" (top right)
+   - Click "Load unpacked"
+   - Select the extension folder
 
-### Step 1: Create a GitHub Repository
-* Create a repository named `CodeChef-Solutions` (or any name you prefer) on GitHub. Leave it public or private as you wish.
-
-### Step 2: Generate a Personal Access Token (Classic)
-1. Go to your GitHub account **Settings** -> Scroll down to **Developer Settings** (left sidebar).
-2. Click on **Personal access tokens** -> Select **Tokens (classic)**.
-3. Click on the **Generate new token** dropdown and choose **Generate new token (classic)**.
-4. Give it a note (e.g., `CodeHub-Extension`).
-5. Under **Select scopes**, check the main **`repo`** box (this grants full control of repositories so the extension can commit files).
-6. Scroll to the bottom and click **Generate token**.
-7. ⚠️ **Copy the token immediately!** It will only be shown once.
-
-### Step 3: Connect CodeHub
-1. Click the extension puzzle icon in your browser toolbar and **Pin (📌) CodeHub**.
-2. Click on the CodeHub icon to open the popup panel.
-3. Enter your **GitHub Username**, the exact **Repository Name**, and paste your **Personal Access Token (PAT)**.
-4. Click **Save Configuration**. The status badge will flash green showing **"Connected ✅"**.
+4. **Configure Extension**
+   - Click the CodeHub extension icon
+   - Enter your GitHub username
+   - Enter your repository name
+   - Paste your Personal Access Token
+   - Click "Save Configuration"
+   - Status should change to "Connected" with green indicator
 
 ---
 
-## 🔄 Automated Workflow
+## 🎮 Usage
 
-1. Open any problem on CodeChef.
-2. Write your solution and hit **Submit**.
-3. CodeHub instantly captures your code in the staging memory.
-4. Once CodeChef evaluates and flashes **"Correct Answer"**, CodeHub fires the GitHub REST API and pushes your code.
+1. **Navigate to CodeChef**
+   - Go to any problem on CodeChef
+   - Write your solution in the editor
 
-### 📁 Sample Repository Structure After Auto-Push:
-```text
-YourRepo/
+2. **Submit Solution**
+   - Click the "Submit" button
+   - CodeHub automatically captures your code at this moment
+
+3. **Get Accepted**
+   - When verdict shows "Correct Answer"
+   - CodeHub automatically pushes to GitHub
+   - You'll see a notification confirming the push
+
+4. **Check Your Repo**
+   - Your solution will be in `DD-MM-YY/PROBLEMCODE.ext`
+   - A `README.md` will track all problems solved that day
+   - Beautiful header comments added to each solution
+
+---
+
+## 📂 Repository Structure
+
+Your GitHub repository will be organized like this:
+
+```
+CodeChef-Solutions/
 ├── 29-06-26/
-│   ├── README.md          <-- Daily summary table listing solved problems
-│   ├── TOTR.cpp           <-- C++ Solution file with custom header
-│   └── FLOW001.py         <-- Another language solution
-└── 30-06-26/
+│   ├── README.md              # Daily summary of problems
+│   ├── TOTR.cpp              # Solution 1
+│   └── CHEFSTEP.py           # Solution 2
+├── 30-06-26/
+│   ├── README.md
+│   ├── MAXDIFF.cpp
+│   └── AMMEAT.java
+└── 01-07-26/
     ├── README.md
-    └── MAXDIFF.cpp
+    └── CIELRCPT.cpp
+```
+
+### README Format
+
+Each `README.md` looks like this:
+
+```markdown
+# CodeChef Solutions - Saturday, June 29, 2026
+
+## Problems Solved
+
+| # | Problem | Language | Solution |
+|---|---------|----------|----------|
+| 1 | [TOTR](https://www.codechef.com/problems/TOTR) | C++17 | [TOTR.cpp](./TOTR.cpp) |
+| 2 | [CHEFSTEP](https://www.codechef.com/problems/CHEFSTEP) | Python 3 | [CHEFSTEP.py](./CHEFSTEP.py) |
+
+---
+
+<div align="center">
+  <sub>Auto-generated by <strong>CodeHub</strong> 🚀</sub>
+</div>
+```
+
+### Solution File Format
+
+Each solution includes a beautiful header:
+
+```cpp
+/*
+ ╔═══════════════════════════════════════════════════════════════════════╗
+ ║  Problem  : TOTR                                                      ║
+ ║  Platform : CodeChef                                                  ║
+ ║  Status   : Accepted ✅                                               ║
+ ║  Date     : June 29, 2026                                             ║
+ ║  URL      : https://www.codechef.com/problems/TOTR                    ║
+ ╚═══════════════════════════════════════════════════════════════════════╝
+ */
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    // Your solution code...
+    return 0;
+}
+```
+
+---
+
+## 🔧 Technical Details
+
+### Capture-on-Submit Strategy
+
+**Problem Solved**: Previous implementations failed because:
+- Code was captured after submission
+- React re-rendered the page showing verdict
+- Editor DOM was destroyed/replaced
+- Code was lost
+
+**Solution**:
+1. Listen for Submit button click event
+2. **Immediately** extract code from Monaco editor (before React unmounts)
+3. Stage code in `chrome.storage.local` with `pendingSubmission` key
+4. MutationObserver watches for verdict
+5. On "Correct Answer", retrieve staged data and push to GitHub
+
+### Monaco Editor Extraction
+
+CodeHub uses multiple strategies to extract code:
+
+1. **Monaco API** (`window.monaco.editor.getModels()`) - Most reliable
+2. **DOM Parsing** (`.monaco-editor .view-line`) - Fallback for React components
+3. **Textarea** - Legacy/mobile view support
+
+### MutationObserver Fix
+
+**Old approach** (crashed):
+```javascript
+// ❌ Observing dynamic React container that may not exist
+observer.observe(verdictContainer, { childList: true });
+```
+
+**New approach** (stable):
+```javascript
+// ✅ Observing document.body (always exists, never unmounts)
+observer.observe(document.body, { 
+  childList: true, 
+  subtree: true 
+});
+```
+
+### File Extensions
+
+| Language | Extension |
+|----------|-----------|
+| C++      | `.cpp`    |
+| Python   | `.py`     |
+| Java     | `.java`   |
+| JavaScript | `.js`   |
+| C#       | `.cs`     |
+| C        | `.c`      |
+| Go       | `.go`     |
+| Rust     | `.rs`     |
+| Ruby     | `.rb`     |
+| Kotlin   | `.kt`     |
+| Swift    | `.swift`  |
+
+---
+
+## 🐛 Troubleshooting
+
+### Extension Not Capturing Code
+
+**Symptoms**: No code captured after submit
+**Solutions**:
+- Ensure you're on a CodeChef problem page
+- Check browser console for `[CodeHub]` logs
+- Verify Monaco editor is fully loaded before submitting
+- Try reloading the page
+
+### GitHub Push Failed
+
+**Symptoms**: Error notification after AC verdict
+**Solutions**:
+- Verify your Personal Access Token is valid
+- Ensure token has `repo` scope
+- Check repository name is correct
+- Verify repository exists on GitHub
+
+### README Not Updating
+
+**Symptoms**: README exists but new problems not added
+**Solutions**:
+- Check GitHub API rate limits
+- Verify token permissions
+- Ensure existing README has valid table format
+
+### Status Shows "Not Connected"
+
+**Symptoms**: Red status indicator in popup
+**Solutions**:
+- Re-enter configuration details
+- Test with "Save Configuration" button
+- Verify network connection
+- Check token hasn't expired
+
+---
+
+## 🎨 Customization
+
+### Changing Date Format
+
+Edit `background.js`, function `formatDateFolder()`:
+
+```javascript
+function formatDateFolder(date) {
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = String(date.getFullYear()).slice(-2);
+  return `${day}-${month}-${year}`; // Change format here
+}
+```
+
+### Changing Repository Structure
+
+Edit `background.js`, function `handleAcceptedSolution()`:
+
+```javascript
+// Change from: dateFolder/PROBLEM.ext
+const filePath = `${dateFolder}/${fileName}`;
+
+// To: custom/path/structure
+const filePath = `solutions/${dateFolder}/${fileName}`;
+```
+
+### Changing UI Theme
+
+Edit `popup.css` CSS variables:
+
+```css
+:root {
+  --accent-emerald: #10b981;  /* Change primary accent */
+  --accent-blue: #3b82f6;     /* Change secondary accent */
+  --bg-primary: #0a0a0f;      /* Change background */
+}
+```
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+---
+
+## 🙏 Acknowledgments
+
+- Built for the competitive programming community
+- Inspired by the need for better solution organization
+- Uses GitHub API v3 for reliable repository management
+
+---
+
+## 📧 Support
+
+If you encounter any issues or have questions:
+
+1. Check the [Troubleshooting](#-troubleshooting) section
+2. Review browser console logs (`[CodeHub]` prefix)
+3. Open an issue on GitHub
+4. Contact via email
+
+---
+
+<div align="center">
+
+**Made with ❤️ for competitive programmers**
+
+[Report Bug](https://github.com/yourusername/codehub/issues) · [Request Feature](https://github.com/yourusername/codehub/issues)
+
+</div>
