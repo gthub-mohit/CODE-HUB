@@ -1,4 +1,4 @@
-# 🚀 CodeHub - Automated CodeChef to GitHub Sync
+# CodeHub - Automated CodeChef to GitHub Sync
 
 <div align="center">
 
@@ -12,21 +12,21 @@
 
 ---
 
-## ✨ Features
+##Features
 
-### 🎯 Core Functionality
+###Core Functionality
 - **Automatic Sync**: Instantly pushes your accepted CodeChef solutions to GitHub
 - **Capture-on-Submit Strategy**: Captures code at the moment you click submit - no more race conditions!
 - **Monaco Editor Support**: Properly extracts code from CodeChef's React-based Monaco editor
 - **Verdict Detection**: Watches for "Correct Answer" verdict and triggers push automatically
 
-### 📁 Smart Organization
+###Smart Organization
 - **Date-Wise Folders**: Solutions organized by date in `DD-MM-YY` format (e.g., `29-06-26/`)
 - **Dynamic README Generation**: Each date folder gets its own `README.md` tracking all problems solved that day
 - **README Updates**: Automatically appends new solutions to existing date READMEs - never overwrites!
 - **Clean File Naming**: Solutions saved as `PROBLEMCODE.ext` (e.g., `TOTR.cpp`)
 
-### 💎 Beautiful UI
+###Beautiful UI
 - **Modern Dark Theme**: Sleek, developer-centric design with deep space grays
 - **Emerald & Blue Accents**: High-contrast color scheme for excellent readability
 - **Smooth Animations**: Polished transitions and micro-interactions
@@ -34,7 +34,7 @@
 - **Password Toggle**: Show/hide your Personal Access Token
 - **History Tracking**: View all your successful pushes with commit links
 
-### 🛡️ Robust Architecture
+###Robust Architecture
 - **MutationObserver Fix**: Observes `document.body` to prevent crashes
 - **No Race Conditions**: Code captured before React re-renders the page
 - **Multi-Language Support**: C++, Python, Java, JavaScript, C#, Go, Rust, and more
@@ -43,14 +43,14 @@
 
 ---
 
-## 📦 Installation
+##Installation
 
-### Prerequisites
+###Prerequisites
 1. A GitHub account
 2. A GitHub repository where you want to store solutions
 3. A GitHub Personal Access Token with `repo` scope
 
-### Setup Steps
+###Setup Steps
 
 1. **Generate GitHub Token**
    - Visit [GitHub Token Settings](https://github.com/settings/tokens/new?scopes=repo&description=CodeHub+Extension)
@@ -78,7 +78,7 @@
 
 ---
 
-## 🎮 Usage
+##Usage
 
 1. **Navigate to CodeChef**
    - Go to any problem on CodeChef
@@ -100,7 +100,7 @@
 
 ---
 
-## 📂 Repository Structure
+##Repository Structure
 
 Your GitHub repository will be organized like this:
 
@@ -119,7 +119,7 @@ CodeChef-Solutions/
     └── CIELRCPT.cpp
 ```
 
-### README Format
+###README Format
 
 Each `README.md` looks like this:
 
@@ -140,7 +140,7 @@ Each `README.md` looks like this:
 </div>
 ```
 
-### Solution File Format
+###Solution File Format
 
 Each solution includes a beautiful header:
 
@@ -149,7 +149,7 @@ Each solution includes a beautiful header:
  ╔═══════════════════════════════════════════════════════════════════════╗
  ║  Problem  : TOTR                                                      ║
  ║  Platform : CodeChef                                                  ║
- ║  Status   : Accepted ✅                                               ║
+ ║  Status   : Accepted                                                  ║
  ║  Date     : June 29, 2026                                             ║
  ║  URL      : https://www.codechef.com/problems/TOTR                    ║
  ╚═══════════════════════════════════════════════════════════════════════╝
@@ -166,9 +166,9 @@ int main() {
 
 ---
 
-## 🔧 Technical Details
+##Technical Details
 
-### Capture-on-Submit Strategy
+###Capture-on-Submit Strategy
 
 **Problem Solved**: Previous implementations failed because:
 - Code was captured after submission
@@ -183,7 +183,7 @@ int main() {
 4. MutationObserver watches for verdict
 5. On "Correct Answer", retrieve staged data and push to GitHub
 
-### Monaco Editor Extraction
+###Monaco Editor Extraction
 
 CodeHub uses multiple strategies to extract code:
 
@@ -191,7 +191,7 @@ CodeHub uses multiple strategies to extract code:
 2. **DOM Parsing** (`.monaco-editor .view-line`) - Fallback for React components
 3. **Textarea** - Legacy/mobile view support
 
-### MutationObserver Fix
+###MutationObserver Fix
 
 **Old approach** (crashed):
 ```javascript
@@ -226,9 +226,9 @@ observer.observe(document.body, {
 
 ---
 
-## 🐛 Troubleshooting
+##Troubleshooting
 
-### Extension Not Capturing Code
+###Extension Not Capturing Code
 
 **Symptoms**: No code captured after submit
 **Solutions**:
@@ -237,7 +237,7 @@ observer.observe(document.body, {
 - Verify Monaco editor is fully loaded before submitting
 - Try reloading the page
 
-### GitHub Push Failed
+###GitHub Push Failed
 
 **Symptoms**: Error notification after AC verdict
 **Solutions**:
@@ -246,7 +246,7 @@ observer.observe(document.body, {
 - Check repository name is correct
 - Verify repository exists on GitHub
 
-### README Not Updating
+###README Not Updating
 
 **Symptoms**: README exists but new problems not added
 **Solutions**:
@@ -254,7 +254,7 @@ observer.observe(document.body, {
 - Verify token permissions
 - Ensure existing README has valid table format
 
-### Status Shows "Not Connected"
+###Status Shows "Not Connected"
 
 **Symptoms**: Red status indicator in popup
 **Solutions**:
@@ -265,9 +265,9 @@ observer.observe(document.body, {
 
 ---
 
-## 🎨 Customization
+##Customization
 
-### Changing Date Format
+###Changing Date Format
 
 Edit `background.js`, function `formatDateFolder()`:
 
@@ -292,7 +292,7 @@ const filePath = `${dateFolder}/${fileName}`;
 const filePath = `solutions/${dateFolder}/${fileName}`;
 ```
 
-### Changing UI Theme
+###Changing UI Theme
 
 Edit `popup.css` CSS variables:
 
@@ -306,7 +306,7 @@ Edit `popup.css` CSS variables:
 
 ---
 
-## 🤝 Contributing
+##Contributing
 
 Contributions are welcome! Please follow these steps:
 
@@ -318,13 +318,13 @@ Contributions are welcome! Please follow these steps:
 
 ---
 
-## 📄 License
+##License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 ---
 
-## 🙏 Acknowledgments
+##Acknowledgments
 
 - Built for the competitive programming community
 - Inspired by the need for better solution organization
@@ -332,7 +332,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ---
 
-## 📧 Support
+##Support
 
 If you encounter any issues or have questions:
 
@@ -344,8 +344,6 @@ If you encounter any issues or have questions:
 ---
 
 <div align="center">
-
-**Made with ❤️ for competitive programmers**
 
 [Report Bug](https://github.com/yourusername/codehub/issues) · [Request Feature](https://github.com/yourusername/codehub/issues)
 
