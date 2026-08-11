@@ -1,0 +1,56 @@
+{
+  "manifest_version": 3,
+  "name": "CodeHub",
+  "version": "3.1.2",
+  "description": "Automatically syncs your CodeChef, LeetCode, and Codeforces solutions to separate GitHub repositories",
+  "permissions": [
+    "storage",
+    "scripting",
+    "activeTab",
+    "notifications"
+  ],
+  "host_permissions": [
+    "https://www.codechef.com/*",
+    "https://leetcode.com/*",
+    "https://codeforces.com/*",
+    "https://api.github.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.codechef.com/*",
+        "https://leetcode.com/*",
+        
+        "https://codeforces.com/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["platforms/*.js"],
+      "matches": [
+        "https://www.codechef.com/*",
+        "https://leetcode.com/*",
+        "https://codeforces.com/*"
+      ]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
