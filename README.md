@@ -1,159 +1,229 @@
-# CodeHub - Automated CodeChef to GitHub Sync
+# CodeHub - Automated CodeChef & LeetCode to GitHub Sync
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-2.0.0-emerald)
+![Version](https://img.shields.io/badge/version-3.0.0-emerald)
 ![Manifest](https://img.shields.io/badge/manifest-v3-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-*Automatically sync your accepted CodeChef solutions to GitHub with beautiful date-wise organization*
+**Automatically sync your accepted CodeChef and LeetCode solutions to GitHub with beautiful date-wise organization.**
 
 </div>
 
 ---
 
-##Features
+## ✨ Features
 
-###Core Functionality
-- **Automatic Sync**: Instantly pushes your accepted CodeChef solutions to GitHub
-- **Capture-on-Submit Strategy**: Captures code at the moment you click submit - no more race conditions!
-- **Monaco Editor Support**: Properly extracts code from CodeChef's React-based Monaco editor
-- **Verdict Detection**: Watches for "Correct Answer" verdict and triggers push automatically
+### 🚀 Core Functionality
 
-###Smart Organization
-- **Date-Wise Folders**: Solutions organized by date in `DD-MM-YY` format (e.g., `29-06-26/`)
-- **Dynamic README Generation**: Each date folder gets its own `README.md` tracking all problems solved that day
-- **README Updates**: Automatically appends new solutions to existing date READMEs - never overwrites!
-- **Clean File Naming**: Solutions saved as `PROBLEMCODE.ext` (e.g., `TOTR.cpp`)
+- **Multi-Platform Sync**: Automatically sync accepted solutions from CodeChef and LeetCode to GitHub
+- **Automatic GitHub Push**: Solutions are pushed directly to your configured GitHub repository
+- **Capture-on-Submit Strategy**: Captures your code at the moment you submit
+- **Automatic Verdict Detection**: Detects successful submissions and triggers the GitHub sync
+- **Multi-Language Support**: Supports C++, Python, Java, JavaScript, C#, Go, Rust, and more
+- **Platform-Aware Solutions**: Automatically stores the correct platform, problem name, URL, language, and submission details
 
-###Beautiful UI
-- **Modern Dark Theme**: Sleek, developer-centric design with deep space grays
-- **Emerald & Blue Accents**: High-contrast color scheme for excellent readability
-- **Smooth Animations**: Polished transitions and micro-interactions
-- **Live Status Indicator**: Visual connection status with your GitHub repository
-- **Password Toggle**: Show/hide your Personal Access Token
-- **History Tracking**: View all your successful pushes with commit links
+### 📁 Smart Organization
 
-###Robust Architecture
-- **MutationObserver Fix**: Observes `document.body` to prevent crashes
-- **No Race Conditions**: Code captured before React re-renders the page
-- **Multi-Language Support**: C++, Python, Java, JavaScript, C#, Go, Rust, and more
-- **Error Handling**: Comprehensive error messages and validation
-- **Manifest V3**: Built with the latest Chrome extension standards
+Solutions are automatically organized using date-wise folders.
 
----
+Example:
 
-##Installation
+```text
+29-06-26/
+├── README.md
+├── TOTR.cpp
+└── TWO_SUM.cpp
 
-###Prerequisites
-1. A GitHub account
-2. A GitHub repository where you want to store solutions
-3. A GitHub Personal Access Token with `repo` scope
+Each date folder contains:
 
-###Setup Steps
+A README.md containing all problems solved that day
+Individual solution files
+Problem links
+Programming language information
+Platform information
+🎨 Beautiful UI
+Modern dark theme
+Emerald & blue accents
+Smooth animations
+Live GitHub connection status
+GitHub username and repository configuration
+Personal Access Token visibility toggle
+Submission history
+Commit links for successful GitHub pushes
+🛡️ Robust Architecture
+MutationObserver-based submission and verdict detection
+Capture-before-re-render strategy
+Handles dynamic React-based interfaces
+Platform-specific content extraction
+Comprehensive error handling
+Manifest V3 compatible
+GitHub API integration
+🌐 Supported Platforms
+CodeChef
 
-1. **Generate GitHub Token**
-   - Visit [GitHub Token Settings](https://github.com/settings/tokens/new?scopes=repo&description=CodeHub+Extension)
-   - Select the `repo` scope
-   - Generate and copy your token (starts with `ghp_` or `github_pat_`)
+CodeHub automatically detects accepted CodeChef submissions and pushes the solution to GitHub.
 
-2. **Create Repository**
-   - Create a new repository on GitHub (e.g., `CodeChef-Solutions`)
-   - Can be public or private
+LeetCode
 
-3. **Install Extension**
-   - Clone this repository or download as ZIP
-   - Open Chrome and go to `chrome://extensions/`
-   - Enable "Developer mode" (top right)
-   - Click "Load unpacked"
-   - Select the extension folder
+CodeHub now supports LeetCode as well.
 
-4. **Configure Extension**
-   - Click the CodeHub extension icon
-   - Enter your GitHub username
-   - Enter your repository name
-   - Paste your Personal Access Token
-   - Click "Save Configuration"
-   - Status should change to "Connected" with green indicator
+The workflow remains simple:
 
----
+Open a LeetCode problem
+Write your solution
+Submit it
+Wait for the solution to be accepted
+CodeHub automatically pushes it to GitHub
 
-##Usage
+You can configure the GitHub repository where your LeetCode solutions should be stored.
 
-1. **Navigate to CodeChef**
-   - Go to any problem on CodeChef
-   - Write your solution in the editor
+📦 Installation
+Prerequisites
 
-2. **Submit Solution**
-   - Click the "Submit" button
-   - CodeHub automatically captures your code at this moment
+Before using CodeHub, you need:
 
-3. **Get Accepted**
-   - When verdict shows "Correct Answer"
-   - CodeHub automatically pushes to GitHub
-   - You'll see a notification confirming the push
+A GitHub account
+A GitHub repository for storing your solutions
+A GitHub Personal Access Token
+Google Chrome or another Chromium-based browser
+🔑 1. Generate GitHub Personal Access Token
 
-4. **Check Your Repo**
-   - Your solution will be in `DD-MM-YY/PROBLEMCODE.ext`
-   - A `README.md` will track all problems solved that day
-   - Beautiful header comments added to each solution
+Go to:
 
----
+https://github.com/settings/tokens/new?scopes=repo&description=CodeHub+Extension
 
-##Repository Structure
+Create a token with the required repo permissions.
 
-Your GitHub repository will be organized like this:
+Copy the token after generating it.
 
-```
-CodeChef-Solutions/
-├── 29-06-26/
-│   ├── README.md              # Daily summary of problems
-│   ├── TOTR.cpp              # Solution 1
-│   └── CHEFSTEP.py           # Solution 2
-├── 30-06-26/
+⚠️ Keep your GitHub token private. Never share it publicly or commit it to a repository.
+
+📁 2. Create a GitHub Repository
+
+Create a new repository on GitHub.
+
+For example:
+
+CodeChef-Solutions
+
+or
+
+LeetCode-Solutions
+
+The repository can be either public or private.
+
+CodeHub will automatically create and update files inside the repository.
+
+🧩 3. Install CodeHub
+Download or clone this repository
+Open Chrome
+Navigate to:
+chrome://extensions/
+Enable Developer mode
+Click Load unpacked
+Select the CodeHub extension folder
+
+The CodeHub extension should now appear in your extensions list.
+
+⚙️ 4. Configure CodeHub
+
+Click the CodeHub extension icon and enter:
+
+GitHub Username
+GitHub Repository
+GitHub Personal Access Token
+
+For example:
+
+Username: yourusername
+Repository: LeetCode-Solutions
+Token: github_pat_xxxxxxxxx
+
+Click Save Configuration.
+
+If everything is configured correctly, the connection status should become:
+
+Connected
+🚀 Usage
+CodeChef
+Open any CodeChef problem
+Write your solution
+Click Submit
+CodeHub captures your code
+CodeChef returns the verdict
+If the solution is accepted, CodeHub pushes it to GitHub
+A notification confirms the successful push
+LeetCode
+Open any LeetCode problem
+Write your solution
+Click Submit
+CodeHub captures the submitted solution
+CodeHub detects the accepted submission
+The solution is automatically pushed to GitHub
+A notification confirms the successful push
+
+No manual copying or uploading is required.
+
+📂 Repository Structure
+
+CodeHub organizes your solutions by date.
+
+For example:
+
+LeetCode-Solutions/
+├── 10-08-26/
 │   ├── README.md
-│   ├── MAXDIFF.cpp
-│   └── AMMEAT.java
-└── 01-07-26/
+│   ├── TWO_SUM.cpp
+│   └── VALID_PARENTHESES.cpp
+│
+├── 11-08-26/
+│   ├── README.md
+│   ├── BINARY_SEARCH.cpp
+│   └── MERGE_SORT.cpp
+│
+└── 12-08-26/
     ├── README.md
-    └── CIELRCPT.cpp
-```
+    └── SEARCH_INSERT_POSITION.cpp
 
-###README Format
+The same structure can be used for CodeChef solutions.
 
-Each `README.md` looks like this:
+📝 Daily README
 
-```markdown
-# CodeChef Solutions - Saturday, June 29, 2026
+Every date folder contains a README.md that keeps track of the problems solved that day.
+
+Example:
+
+# CodeHub Solutions - Tuesday, August 12, 2026
 
 ## Problems Solved
 
-| # | Problem | Language | Solution |
-|---|---------|----------|----------|
-| 1 | [TOTR](https://www.codechef.com/problems/TOTR) | C++17 | [TOTR.cpp](./TOTR.cpp) |
-| 2 | [CHEFSTEP](https://www.codechef.com/problems/CHEFSTEP) | Python 3 | [CHEFSTEP.py](./CHEFSTEP.py) |
+| # | Platform | Problem | Language | Solution |
+|---|----------|---------|----------|----------|
+| 1 | LeetCode | Two Sum | C++17 | [TWO_SUM.cpp](./TWO_SUM.cpp) |
+| 2 | LeetCode | Binary Search | C++17 | [BINARY_SEARCH.cpp](./BINARY_SEARCH.cpp) |
+| 3 | CodeChef | Some Problem | C++17 | [PROBLEM.cpp](./PROBLEM.cpp) |
 
 ---
 
 <div align="center">
   <sub>Auto-generated by <strong>CodeHub</strong> 🚀</sub>
 </div>
-```
+💻 Solution File Format
 
-###Solution File Format
+Every solution contains a structured header containing important submission information.
 
-Each solution includes a beautiful header:
+Example:
 
-```cpp
 /*
  ╔═══════════════════════════════════════════════════════════════════════╗
- ║  Problem  : TOTR                                                      ║
- ║  Platform : CodeChef                                                  ║
+ ║  Problem  : Two Sum                                                   ║
+ ║  Platform : LeetCode                                                  ║
  ║  Status   : Accepted                                                  ║
- ║  Date     : June 29, 2026                                             ║
- ║  URL      : https://www.codechef.com/problems/TOTR                    ║
+ ║  Date     : August 12, 2026                                           ║
+ ║  URL      : https://leetcode.com/problems/two-sum/                    ║
  ╚═══════════════════════════════════════════════════════════════════════╝
- */
+*/
 
 #include <iostream>
 using namespace std;
@@ -162,189 +232,185 @@ int main() {
     // Your solution code...
     return 0;
 }
-```
+🧠 Technical Details
+Capture-on-Submit Strategy
 
----
+Modern competitive programming platforms use dynamic web applications, which can cause submitted code to disappear or change after submission.
 
-##Technical Details
+CodeHub solves this by capturing the code before the page re-renders.
 
-###Capture-on-Submit Strategy
+The general workflow is:
 
-**Problem Solved**: Previous implementations failed because:
-- Code was captured after submission
-- React re-rendered the page showing verdict
-- Editor DOM was destroyed/replaced
-- Code was lost
+User clicks Submit
+        ↓
+CodeHub captures source code
+        ↓
+Submission data stored temporarily
+        ↓
+Platform verdict is monitored
+        ↓
+Solution accepted
+        ↓
+GitHub API called
+        ↓
+Solution pushed to repository
 
-**Solution**:
-1. Listen for Submit button click event
-2. **Immediately** extract code from Monaco editor (before React unmounts)
-3. Stage code in `chrome.storage.local` with `pendingSubmission` key
-4. MutationObserver watches for verdict
-5. On "Correct Answer", retrieve staged data and push to GitHub
+This prevents the submitted code from being lost during React re-renders.
 
-###Monaco Editor Extraction
+🔍 Code Extraction
 
-CodeHub uses multiple strategies to extract code:
+CodeHub uses multiple strategies depending on the platform.
 
-1. **Monaco API** (`window.monaco.editor.getModels()`) - Most reliable
-2. **DOM Parsing** (`.monaco-editor .view-line`) - Fallback for React components
-3. **Textarea** - Legacy/mobile view support
+CodeChef
 
-###MutationObserver Fix
+Code extraction supports:
 
-**Old approach** (crashed):
-```javascript
-// ❌ Observing dynamic React container that may not exist
-observer.observe(verdictContainer, { childList: true });
-```
+Monaco Editor API
+Monaco DOM parsing
+Textarea fallback
+LeetCode
 
-**New approach** (stable):
-```javascript
-// ✅ Observing document.body (always exists, never unmounts)
-observer.observe(document.body, { 
-  childList: true, 
-  subtree: true 
+CodeHub extracts the submitted solution from the LeetCode editor and associates it with:
+
+Problem title
+Problem URL
+Programming language
+Submission status
+Submission date
+Platform
+👀 Verdict Detection
+
+CodeHub monitors the relevant parts of the webpage to determine whether a submission was accepted.
+
+For dynamically rendered pages, MutationObserver is used to detect changes without relying on fixed DOM elements.
+
+Instead of observing a dynamic element that may disappear:
+
+observer.observe(verdictContainer, {
+    childList: true
 });
-```
 
-### File Extensions
+CodeHub can observe a stable parent such as:
 
-| Language | Extension |
-|----------|-----------|
-| C++      | `.cpp`    |
-| Python   | `.py`     |
-| Java     | `.java`   |
-| JavaScript | `.js`   |
-| C#       | `.cs`     |
-| C        | `.c`      |
-| Go       | `.go`     |
-| Rust     | `.rs`     |
-| Ruby     | `.rb`     |
-| Kotlin   | `.kt`     |
-| Swift    | `.swift`  |
+observer.observe(document.body, {
+    childList: true,
+    subtree: true
+});
 
----
+This makes the detection more reliable on React-based websites.
 
-##Troubleshooting
+📄 Supported File Extensions
+Language	Extension
+C++	.cpp
+C	.c
+Python	.py
+Java	.java
+JavaScript	.js
+TypeScript	.ts
+C#	.cs
+Go	.go
+Rust	.rs
+Ruby	.rb
+Kotlin	.kt
+Swift	.swift
+🔧 Troubleshooting
+Extension Not Capturing Code
 
-###Extension Not Capturing Code
+Symptoms:
+No solution is captured after submitting.
 
-**Symptoms**: No code captured after submit
-**Solutions**:
-- Ensure you're on a CodeChef problem page
-- Check browser console for `[CodeHub]` logs
-- Verify Monaco editor is fully loaded before submitting
-- Try reloading the page
+Possible solutions:
 
-###GitHub Push Failed
+Make sure you are on a supported platform
+Reload the problem page
+Make sure the editor has completely loaded
+Check the browser console for [CodeHub] logs
+Try submitting the solution again
+GitHub Push Failed
 
-**Symptoms**: Error notification after AC verdict
-**Solutions**:
-- Verify your Personal Access Token is valid
-- Ensure token has `repo` scope
-- Check repository name is correct
-- Verify repository exists on GitHub
+Symptoms:
+The solution is accepted but isn't pushed to GitHub.
 
-###README Not Updating
+Check the following:
 
-**Symptoms**: README exists but new problems not added
-**Solutions**:
-- Check GitHub API rate limits
-- Verify token permissions
-- Ensure existing README has valid table format
+GitHub username is correct
+Repository name is correct
+GitHub Personal Access Token is valid
+Token has the required permissions
+Repository exists
+Internet connection is available
+README Not Updating
 
-###Status Shows "Not Connected"
+Symptoms:
+The solution is pushed but the daily README isn't updated.
 
-**Symptoms**: Red status indicator in popup
-**Solutions**:
-- Re-enter configuration details
-- Test with "Save Configuration" button
-- Verify network connection
-- Check token hasn't expired
+Possible solutions:
 
----
+Check GitHub API permissions
+Verify the repository configuration
+Check browser console logs
+Make sure the existing README has a valid format
+Status Shows "Not Connected"
 
-##Customization
+Possible solutions:
 
-###Changing Date Format
+Open CodeHub
+Verify GitHub username
+Verify repository name
+Re-enter your Personal Access Token
+Click Save Configuration
+Check the connection status again
+🎨 Customization
+Changing Date Format
 
-Edit `background.js`, function `formatDateFolder()`:
+The date folder format can be modified inside the date formatting function.
 
-```javascript
-function formatDateFolder(date) {
-  const day = String(date.getDate()).padStart(2, '0');
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const year = String(date.getFullYear()).slice(-2);
-  return `${day}-${month}-${year}`; // Change format here
-}
-```
+Current format:
 
-### Changing Repository Structure
+DD-MM-YY
 
-Edit `background.js`, function `handleAcceptedSolution()`:
+Example:
 
-```javascript
-// Change from: dateFolder/PROBLEM.ext
-const filePath = `${dateFolder}/${fileName}`;
+12-08-26
+Changing Repository Structure
 
-// To: custom/path/structure
-const filePath = `solutions/${dateFolder}/${fileName}`;
-```
+By default:
 
-###Changing UI Theme
+DD-MM-YY/PROBLEM.ext
 
-Edit `popup.css` CSS variables:
+You can modify the implementation to use a custom structure such as:
 
-```css
-:root {
-  --accent-emerald: #10b981;  /* Change primary accent */
-  --accent-blue: #3b82f6;     /* Change secondary accent */
-  --bg-primary: #0a0a0f;      /* Change background */
-}
-```
+solutions/leetcode/DD-MM-YY/PROBLEM.ext
 
----
+or:
 
-##Contributing
+leetcode/DD-MM-YY/PROBLEM.ext
+🤝 Contributing
 
-Contributions are welcome! Please follow these steps:
+Contributions are welcome!
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+Fork the repository
+Create a feature branch
+git checkout -b feature/AmazingFeature
+Commit your changes
+git commit -m "Add AmazingFeature"
+Push the branch
+git push origin feature/AmazingFeature
+Open a Pull Request
+📜 License
 
----
+This project is licensed under the MIT License.
 
-##License
+🙌 Acknowledgments
+Built for the competitive programming community
+Inspired by the need for automated and organized solution tracking
+Uses the GitHub API for repository management
+Built as a Chrome Manifest V3 extension
+🐛 Support
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+If you encounter an issue:
 
----
-
-##Acknowledgments
-
-- Built for the competitive programming community
-- Inspired by the need for better solution organization
-- Uses GitHub API v3 for reliable repository management
-
----
-
-##Support
-
-If you encounter any issues or have questions:
-
-1. Check the [Troubleshooting](#-troubleshooting) section
-2. Review browser console logs (`[CodeHub]` prefix)
-3. Open an issue on GitHub
-4. Contact via email
-
----
-
-<div align="center">
-
-[Report Bug](https://github.com/yourusername/codehub/issues) · [Request Feature](https://github.com/yourusername/codehub/issues)
-
-</div>
+Check the Troubleshooting section
+Check browser console logs with the [CodeHub] prefix
+Open an issue on GitHub
+Submit a feature request if you have an idea
