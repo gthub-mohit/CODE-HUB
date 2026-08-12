@@ -245,13 +245,24 @@
     log('Submit listener active');
   }
 
+  // ─── Pending submission data (stored locally since we can't access chrome.storage) ──
+  let pendingCode = null;
+  let pendingProblemCode = null;
+  let pendingLanguage = null;
+
   // ─── Stage Submission Data ──────────────────────────────────────────────
   function stageSubmission(code) {
     const problemCode = getProblemCode();
     const language = getLanguageFromPage();
 
-    const submissionData = {
-      type: 'ACCEPTED_SOLUTION',
+    // Store locally for when verdict is confirmed
+    pendingCode = code;
+    pendingProblemCode = problemCode;
+    pendingLanguage = language;
+
+    // Also notify content script that a submission was detected
+    window.postMessage({
+      type: 'CODEHUB_SUBMISSION_DETECTED',
       payload: {
         platform: 'CodeChef',
         problemCode,
@@ -260,20 +271,9 @@
         url: window.location.href,
         timestamp: new Date().toISOString()
       }
-    };
+    }, '*');
 
-    if (!chrome.runtime?.id) {
-      log('Extension context invalidated');
-      return;
-    }
-
-    chrome.storage.local.set({ pendingSubmission: submissionData }, () => {
-      if (chrome.runtime.lastError) {
-        log('Storage error:', chrome.runtime.lastError.message);
-        return;
-      }
-      log('Submission staged:', problemCode, '|', language);
-    });
+    log('Submission staged:', problemCode, '|', language);
 
     alreadyProcessed = false;
 
@@ -369,46 +369,38 @@
 
     if (!isAccepted) return;
 
-    if (!chrome.runtime?.id) {
-      log('Extension context invalidated');
-      return;
-    }
-
     alreadyProcessed = true;
     log('Correct Answer detected! Processing submission...');
 
-    chrome.storage.local.get(['pendingSubmission'], (data) => {
-      if (chrome.runtime.lastError) {
-        log('Storage error:', chrome.runtime.lastError.message);
-        alreadyProcessed = false;
-        return;
+    if (!pendingCode) {
+      log('No pending submission code found');
+      alreadyProcessed = false;
+      return;
+    }
+
+    // Send combined accepted solution via postMessage to content script
+    window.postMessage({
+      type: 'CODEHUB_ACCEPTED_SOLUTION',
+      payload: {
+        platform: 'CodeChef',
+        problemCode: pendingProblemCode,
+        language: pendingLanguage,
+        code: pendingCode,
+        url: window.location.href,
+        timestamp: new Date().toISOString()
       }
+    }, '*');
 
-      if (!data.pendingSubmission) {
-        log('No pending submission found');
-        return;
-      }
+    log('✅ Sent accepted solution to content script for GitHub push');
 
-      chrome.runtime.sendMessage(data.pendingSubmission, (response) => {
-        if (chrome.runtime.lastError) {
-          log('Message error:', chrome.runtime.lastError.message);
-          alreadyProcessed = false;
-          return;
-        }
-
-        if (response?.success) {
-          log('Successfully pushed to GitHub!');
-          chrome.storage.local.remove(['pendingSubmission']);
-          if (observer) {
-            observer.disconnect();
-            isWatching = false;
-          }
-        } else {
-          log('Push failed:', response?.error);
-          alreadyProcessed = false;
-        }
-      });
-    });
+    // Clean up
+    if (observer) {
+      observer.disconnect();
+      isWatching = false;
+    }
+    pendingCode = null;
+    pendingProblemCode = null;
+    pendingLanguage = null;
   }
 
   // ─── Initialize ─────────────────────────────────────────────────────────
@@ -419,13 +411,6 @@
       document.addEventListener('DOMContentLoaded', setupSubmitListener);
     } else {
       setTimeout(setupSubmitListener, 1000);
-    }
-
-    const currentPath = window.location.pathname;
-    if (!currentPath.includes('/problems/')) {
-      if (chrome.runtime?.id) {
-        chrome.storage.local.remove(['pendingSubmission']);
-      }
     }
   }
 
